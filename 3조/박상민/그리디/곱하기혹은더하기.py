@@ -3,7 +3,7 @@
 a = input()
 b = list(map(int, list(str(a))))
 
-result = b[0]
+result = b[0]  # 기본값으로 설정
 
 for i in range(1, len(b)):
     if b[i] != 0:
