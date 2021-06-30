@@ -1,7 +1,6 @@
 n = int(input())
 w = []
-for i in range(n):
-    w.append(int(input()))
+for i in range(n):  w.append(int(input()))
 w.sort()
 for i in range(n):
     w[i]*=(n-i)

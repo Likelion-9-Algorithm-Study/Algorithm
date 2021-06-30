@@ -19,7 +19,7 @@ else:
     plane1 = (n-2)*(n-2) + 4*(n-1)*(n-2)
     plane2 = 4*(n-2) + 4*(n-1)
     plane3 = 4
-    sum+=min1*plane1
+    sum+=min1*plane1 
     sum+=min2*plane2
     sum+=min3*plane3
 

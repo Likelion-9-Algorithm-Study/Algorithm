@@ -19,5 +19,5 @@ else:
     e = dice[1]*(n-2)*4
     f = dice[0]*(n*n-((n-2)*4)-4)
 
-    print(a+b+c+d+e+f)
+    print( a+b+c+d+e+f )
 
