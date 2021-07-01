@@ -1,17 +1,15 @@
-# https://www.acmicpc.net/problem/11047
+# https://www.acmicpc.net/problem/2217
 import sys
 
-n, k = list(map(int, sys.stdin.readline().split()))
+n = int(sys.stdin.readline())
+a_list = []
+for i in range(n):
+    a_list.append(int(sys.stdin.readline()))
 
-coin_list = []
-for _ in range(n):
-    coin_list.append(int(sys.stdin.readline()))
+a_list.sort(reverse=True)
 
-coin_list.sort(reverse=True)
+candidate = list()
+for i in range(n):
+    candidate.append(a_list[i] * (i+1))
 
-count = 0
-for i in coin_list:
-    count += k // i
-    k %= i
-
-print(count)
+print(max(candidate))
