@@ -3,11 +3,7 @@
 a = input()
 b = list(map(int, list(str(a))))
 
-<<<<<<< HEAD
-result = b[0]  # 기본값으로 설정
-=======
 result = b[0]
->>>>>>> d30c7d80b16e2f48ac6ef4d59a26f4eb2bab0567
 
 for i in range(1, len(b)):
     if b[i] != 0:
