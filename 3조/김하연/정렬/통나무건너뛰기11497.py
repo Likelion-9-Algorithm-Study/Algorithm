@@ -18,6 +18,7 @@ for i in range(T):
         left = temp_left
         right = temp_right
     print(result)
+    
 '''
 for i in range(T):
     n = int(input())
@@ -27,6 +28,4 @@ for i in range(T):
     for i in range(2,n):
         result = max(result, abs(log[i]-log[i-2]))
     print(result)
-
-
 '''
