@@ -1,4 +1,8 @@
 # https://www.acmicpc.net/problem/1041
+<<<<<<< HEAD
+
+=======
+>>>>>>> ab8c15767510d38a0641453e50ad23b95e5eefd3
 import sys
 f = sys.stdin.readline
 
