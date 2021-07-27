@@ -5,7 +5,6 @@ from bisect import bisect_left
 def search():
     min_value = float('inf')
     cnt = 1
-
     for h in range(1, t+1):
         top_idx, bot_idx = bisect_left(tops, (t+1)-h), bisect_left(bottoms, h)
         obs_cnt = n - (top_idx+bot_idx)
