@@ -13,9 +13,10 @@ class Node:
 class Graph:
     def __init__(self, size):
         self.adjList = [None] * (size+1) # 0은 없으므로
+        self.adjList2 = [[] for _ in range(size+1)]
         self.size = size+1
 
-    def insertEdge(self, v1, v2, w):
+    def insertEdge(self, v1, v2, w):    # linked list
         newNode = Node(v2, w)
         newNode.next = self.adjList[v1]
         self.adjList[v1] = newNode
@@ -24,35 +25,66 @@ class Graph:
         newNode.next = self.adjList[v2]
         self.adjList[v2] = newNode
 
-    def factorySearch(self, start, dest):
-        queue = deque()
-        queue.append((start, 10**8))
+    def bfs(self, start, dest, box_weight):
+        visited = [False] * (self.size+1)
+        queue = deque([start])
+        visited[start] = True
 
-        # 우선 너비우선 탐색으로 목적지까지 가는 길을 찾는다.
-        # 그 과정에서 queue에 넣을 때 (vertex, weight) 이렇게 넣는다.
-        # 만약 queue에서 꺼낸 weight가 앞으로 갈 weight보다 크다면 업데이트를 하지 않고 queue에 넣는다.
-        # 만약 queue에서 꺼낸 weight가 앞으로 갈 weight보다 작다면 업데이트를 해서 queue에 넣는다.
+        while queue:
+            w = queue.popleft()
+            if w == dest:
+                return True
+            node = self.adjList[w]
+            while node is not None:
+                if visited[node.vertex] == False and node.weight >= box_weight:
+                    visited[node.vertex] == True
+                    queue.append(node.vertex)
+                node = node.next
+        return False
 
-        tempWeight = 0
-        tempVertex = 0
-        while node is not None:  # 일단 가장 중량이 큰 다리 찾기
-            if node.weight > tempWeight:
-                tempWeight = node.weight
-                tempVertex = node.vertex
-            node = node.next
+    def insertEdge2(self, v1, v2, w):   # list of lists
+        self.adjList2[v1].append((v2, w))
+        self.adjList2[v2].append((v1, w))
 
-        if tempVertex == dest:  # 바로 목적지인 경우 
-            return tempWeight
-        else:                   # 목적지를 찾아야하는 경우
-            self.factorySearch(tempVertex, dest)
+    def bfs2(self, start, dest, box_weight):
+        visited = [False] * (self.size+1)
+        queue = deque([start])
+        visited[start] = True
+        while queue:
+            w = queue.popleft()
+            if w == dest:
+                return True
+            for vertex, weight in self.adjList2[w]:
+                if visited[vertex] == False and weight >= box_weight:
+                    visited[vertex] = True
+                    queue.append(vertex)
+        return False
+
+
+    def findFactory(self, start, dest, max_weight):
+        left = 1
+        right = max_weight
+        answer = 0
+        while left <= right:
+            mid = (left+right)//2
+            if self.bfs2(start, dest, mid) == True:
+                answer = mid
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        return answer
 
 
 n, m = map(int, stdin.readline().split())
 g = Graph(n)
+max_weight = 0
 for _ in range(m):
     v1, v2, w = map(int, stdin.readline().split())
-    g.insertEdge(v1, v2, w)
+    if max_weight < w:      # 중량 최댓값 구하기
+        max_weight = w
+    g.insertEdge2(v1, v2, w)
 
 f1, f2 = map(int, stdin.readline().split())
-result = g.factorySearch(f1, f2)
+result = g.findFactory(f1, f2, max_weight)
 print(result)
