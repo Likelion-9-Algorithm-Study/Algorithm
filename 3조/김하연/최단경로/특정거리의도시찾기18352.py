@@ -11,7 +11,7 @@ for _ in range(m):
     graph[a].append((b, 1))
 
 
-def root():
+def dijkstra():
     q = []
     heapq.heappush(q, (0, x))
     d[x] = 0
@@ -26,7 +26,7 @@ def root():
                 heapq.heappush(q, (cost, i[0]))
 
 
-root()
+dijkstra()
 
 flag = False
 for i in range(1, n + 1):

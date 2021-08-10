@@ -14,7 +14,7 @@ for i in range(M):
     graph[X].append((Y, Z))
 
 
-def root():
+def dijkstra():
     q = []
     heapq.heappush(q, (0, C))
     d[C] = 0
@@ -30,7 +30,7 @@ def root():
                 heapq.heappush(q, (cost, i[0]))
 
 
-root()
+dijkstra()
 
 count, max_d = 0, 0
 
