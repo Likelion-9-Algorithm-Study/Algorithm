@@ -5,7 +5,6 @@ INF = int(1e9)
 
 n, m, x = map(int, f().split())
 graph = [[] for _ in range(n+1)]
-d = [INF] * (n+1)
 
 for i in range(m):
     start, dest, time = map(int, f().split())
