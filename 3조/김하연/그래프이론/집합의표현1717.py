@@ -1,5 +1,6 @@
 import sys
 f = sys.stdin.readline
+sys.setrecursionlimit(10**6)
 
 
 def find_parent(parent, x):
@@ -11,9 +12,10 @@ def find_parent(parent, x):
 def union_parent(parent, a, b):
     a = find_parent(parent, a)
     b = find_parent(parent, b)
-
-    if a < b:   parent[b] = a
-    else: parent[a] = b
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
 
 
 n, m = map(int, f().split())
@@ -27,23 +29,11 @@ for i in range(m):
     if t == 0:
         union_parent(parent, a, b)
     else:
-        pa = find_parent(parent, a)
-        pb = find_parent(parent, b)
-        if pa == pb: print('YES')
-        else: print('NO')
+        if find_parent(parent, a) == find_parent(parent, b):
+            print('YES')
+        else:
+            print('NO')
 
 
-
-'''
-7 8
-0 1 3
-1 1 7
-0 7 6
-1 7 1
-0 3 7
-0 4 2
-0 1 1
-1 1 1
-'''
 
 
